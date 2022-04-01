@@ -27,8 +27,27 @@ void new_huffman() {
 
 bits_t Huffman::encode(int symbol) {
 
-	new_huffman;	
+	new_huffman();
+	path_t huff_path = path_to(huff_tree);
+	bits_t bin_out;
+	for (int i = 0; i <= huff_path.size(); i++){
+		if (huff_path[i] == Direction::LEFT){
+			bin_out.(bool FALSE);
+		}
+		
+		if (huff_path[i] == Direction::RIGHT){
+			bin_out.push_back(bool TRUE);
+		}
+		
+	}	
+	freq_table[symbol]++;
+	return bin_out;
 }
+int Huffman::decode(bool bit){
 
-
+	new_huffman();
+	for (int j = 0; j <= bin_out.size(); j++){
+		
+	}
+}
 
