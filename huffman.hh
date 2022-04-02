@@ -11,6 +11,9 @@
 #include "htree.hh"
 
 class Huffman {
+
+  std::vector<int> freq_table(int,int);
+  
  public:
   // Maximum number of symbols we need to encode (a symbol fits in a char) + EOF
   static const int ALPHABET_SIZE = (1 << CHAR_BIT) + 1;  // (2 ** 8) + 1
@@ -24,13 +27,7 @@ class Huffman {
   Huffman(Huffman&&) = delete;
   Huffman& operator=(const Huffman&) = delete;
   Huffman& operator=(Huffman&&) = delete;
-
- private:
-  std::vector<int> freq_table(257,0);
-  int fake_key = -1;
-  HTree::tree_ptr_t huff_tree;
-  tree_ptr_t decode_ptr = nullptr;
-
+ 
   // Encode a symbol into a sequence of bits, then update frequency table.
   bits_t encode(int symbol);
 
@@ -40,4 +37,9 @@ class Huffman {
   // a character symbol or HEOF.
   // Finally, updates the frequency table with this additional symbol.
   int decode(bool bit);
+
+ private:
+  int fake_key = -1;
+  HTree::tree_ptr_t huff_tree;
+  HTree::tree_ptr_t decode_ptr = nullptr;
 };

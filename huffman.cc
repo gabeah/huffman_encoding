@@ -7,6 +7,7 @@
 
 
 Huffman::Huffman(){
+	freq_table(257,0);	
 	freq_table[256] = 1;	
 }
 
