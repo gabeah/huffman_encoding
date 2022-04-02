@@ -4,24 +4,25 @@
 #include "huffman.hh"
 #include <iostream>
 #include <algorithm> 
+#include "hforest.hh"
 
 
 Huffman::Huffman(){
-	freq_table(257,0);	
+	std::vector<int> freq_table(257,0);	
 	freq_table[256] = 1;	
 }
 
-void new_huffman() {
+void Huffman::build_huffman() {
 
-	HForest::Hforest forest = HForest();
-	for (int c=0, c<ALPHABET_SIZE; c++){
+	HForest forest = HForest();
+	for (int c=0; c<Huffman::ALPHABET_SIZE; c++){
 		forest.add_tree(c, freq_table[c],nullptr,nullptr)
 	}
 	while(forest.size()>1){
 		HTree::tree_ptr_t smallest = pop_tree();
 		HTree::tree_ptr_t sec_smallest = pop_tree();
 	
-		forest.add_tree(fake_key, 
+		HForest.add_tree(fake_key, 
 			smallest->get_value()+sec_smallest->get_value(),
 			smallest,
 			sec_smallest);
@@ -34,7 +35,7 @@ void new_huffman() {
 
 bits_t Huffman::encode(int symbol) {
 
-	new_huffman();
+	build_huffman();
 	path_t huff_path = huff_tree->path_to(symbol);
 	bits_t bin_out;
 	for (int i = 0; i <= huff_path.size(); i++){
@@ -53,7 +54,7 @@ bits_t Huffman::encode(int symbol) {
 int Huffman::decode(bool bit){
 
 	if(!decode_ptr){
-		new_huffman();
+		build_huffman();
 		decode_ptr = huff_tree;
 	}
 

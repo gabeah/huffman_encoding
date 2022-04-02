@@ -12,7 +12,6 @@
 
 class Huffman {
 
-  std::vector<int> freq_table(int,int);
   
  public:
   // Maximum number of symbols we need to encode (a symbol fits in a char) + EOF
@@ -39,6 +38,8 @@ class Huffman {
   int decode(bool bit);
 
  private:
+  void build_huffman();
+  std::vector<int> freq_table;
   int fake_key = -1;
   HTree::tree_ptr_t huff_tree;
   HTree::tree_ptr_t decode_ptr = nullptr;
