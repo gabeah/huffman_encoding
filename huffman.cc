@@ -5,6 +5,11 @@
 #include <iostream>
 #include <algorithm> 
 
+
+Huffman::Huffman(){
+	freq_table[256] = 1;	
+}
+
 void new_huffman() {
 
 	HForest::Hforest forest = HForest();
@@ -22,21 +27,22 @@ void new_huffman() {
 		fake_key--;
 
 	}
+
 	huff_tree = pop_tree();
 }
 
 bits_t Huffman::encode(int symbol) {
 
 	new_huffman();
-	path_t huff_path = path_to(huff_tree);
+	path_t huff_path = huff_tree->path_to(symbol);
 	bits_t bin_out;
 	for (int i = 0; i <= huff_path.size(); i++){
-		if (huff_path[i] == Direction::LEFT){
-			bin_out.(bool FALSE);
+		if (huff_path[i] == HTree::Direction::LEFT){
+			bin_out.push_back(false);
 		}
 		
-		if (huff_path[i] == Direction::RIGHT){
-			bin_out.push_back(bool TRUE);
+		if (huff_path[i] == HTree::Direction::RIGHT){
+			bin_out.push_back(true);
 		}
 		
 	}	
@@ -45,9 +51,28 @@ bits_t Huffman::encode(int symbol) {
 }
 int Huffman::decode(bool bit){
 
-	new_huffman();
-	for (int j = 0; j <= bin_out.size(); j++){
-		
+	if(!decode_ptr){
+		new_huffman();
+		decode_ptr = huff_tree;
 	}
+
+	if(bit) {
+		decode_ptr = decode_ptr->get_child(HTree::Direction::RIGHT);
+	}
+	else {
+		decode_ptr = decode_ptr->get_child(HTree::Direction::LEFT);
+	}
+
+	if(decode_ptr->get_key() < 0){
+		return decode_ptr->get_key();
+	}
+	else{
+		int letter = decode_ptr->get_key();
+		freq_table[letter]++;
+		decode_ptr = nullptr;
+		return letter;
+	}
+
+
 }
 

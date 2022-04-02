@@ -29,7 +29,7 @@ class Huffman {
   std::vector<int> freq_table(257,0);
   int fake_key = -1;
   HTree::tree_ptr_t huff_tree;
-
+  tree_ptr_t decode_ptr = nullptr;
 
   // Encode a symbol into a sequence of bits, then update frequency table.
   bits_t encode(int symbol);
