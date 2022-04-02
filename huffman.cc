@@ -19,8 +19,8 @@ void Huffman::build_huffman() {
 		forest.add_tree(c, freq_table[c],nullptr,nullptr)
 	}
 	while(forest.size()>1){
-		HTree::tree_ptr_t smallest = pop_tree();
-		HTree::tree_ptr_t sec_smallest = pop_tree();
+		HTree::tree_ptr_t smallest = HForest::pop_top(forest);
+		HTree::tree_ptr_t sec_smallest = HForest::pop_top(forest);
 	
 		HForest.add_tree(fake_key, 
 			smallest->get_value()+sec_smallest->get_value(),
@@ -30,10 +30,10 @@ void Huffman::build_huffman() {
 
 	}
 
-	huff_tree = pop_tree();
+	huff_tree = HForest::pop_top(forest);
 }
 
-bits_t Huffman::encode(int symbol) {
+Huffman::bits_t Huffman::encode(int symbol) {
 
 	build_huffman();
 	path_t huff_path = huff_tree->path_to(symbol);
