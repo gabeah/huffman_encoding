@@ -25,8 +25,8 @@ void Huffman::build_huffman() {
 	}
 	while(forest.size()>1){
 		HTree::tree_ptr_t smallest = forest.HForest::pop_top();
-		printf("key: %d\n", smallest->get_key());
-		printf("value: %ld\n", smallest->get_value());
+//		printf("key: %d\n", smallest->get_key());
+//		printf("value: %ld\n", smallest->get_value());
 
 		HTree::tree_ptr_t sec_smallest = forest.HForest::pop_top();
 	
@@ -57,7 +57,7 @@ Huffman::bits_t Huffman::encode(int symbol) {
 		if (*path_index == HTree::Direction::RIGHT){
 			bin_out.push_back(true);
 		}
-		printf("%s\n", bin_out.back() ? "true" : "false");
+		//printf("%s\n", bin_out.back() ? "true" : "false");
 
 		std::advance(path_index, 1);
 		
