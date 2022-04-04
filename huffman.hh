@@ -7,6 +7,7 @@
 
 #include <climits>
 #include <vector>
+#include <iterator>
 
 #include "htree.hh"
 

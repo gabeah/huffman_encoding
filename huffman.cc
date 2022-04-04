@@ -8,44 +8,58 @@
 
 
 Huffman::Huffman(){
-	std::vector<int> freq_table(257,0);	
-	freq_table[256] = 1;	
+	for(int i = 0; i <256; i++){
+		freq_table.push_back(0);
+	}
+	freq_table.push_back(1);
+	//std::vector<int> freq_table(257,0);	
+	//freq_table[256] = 1;	
 }
 
 void Huffman::build_huffman() {
 
 	HForest forest = HForest();
 	for (int c=0; c<Huffman::ALPHABET_SIZE; c++){
-		forest.add_tree(c, freq_table[c],nullptr,nullptr)
+		forest.HForest::add_tree(HTree::tree_ptr_t(new HTree(c, freq_table[c])));
+		//forest.HForest::add_tree(tree);
 	}
 	while(forest.size()>1){
-		HTree::tree_ptr_t smallest = HForest::pop_top(forest);
-		HTree::tree_ptr_t sec_smallest = HForest::pop_top(forest);
+		HTree::tree_ptr_t smallest = forest.HForest::pop_top();
+		printf("key: %d\n", smallest->get_key());
+		printf("value: %ld\n", smallest->get_value());
+
+		HTree::tree_ptr_t sec_smallest = forest.HForest::pop_top();
 	
-		HForest.add_tree(fake_key, 
+		 forest.HForest::add_tree(HTree::tree_ptr_t(new HTree(fake_key, 
 			smallest->get_value()+sec_smallest->get_value(),
 			smallest,
-			sec_smallest);
+			sec_smallest)));
+		//forest.HForest::add_tree(tree);
 		fake_key--;
 
 	}
 
-	huff_tree = HForest::pop_top(forest);
+	huff_tree = forest.HForest::pop_top();
 }
 
 Huffman::bits_t Huffman::encode(int symbol) {
 
+	printf("%d\n", symbol);
 	build_huffman();
-	path_t huff_path = huff_tree->path_to(symbol);
+	HTree::possible_path_t huff_path = huff_tree->path_to(symbol);
 	bits_t bin_out;
-	for (int i = 0; i <= huff_path.size(); i++){
-		if (huff_path[i] == HTree::Direction::LEFT){
+	auto path_index = huff_path->begin();
+	for (int i = 0; i <= (int)huff_path->size(); i++){
+		if (*path_index == HTree::Direction::LEFT){
 			bin_out.push_back(false);
 		}
-		
-		if (huff_path[i] == HTree::Direction::RIGHT){
+
+		if (*path_index == HTree::Direction::RIGHT){
 			bin_out.push_back(true);
 		}
+		printf("%s\n", bin_out.back() ? "true" : "false");
+
+		std::advance(path_index, 1);
 		
 	}	
 	freq_table[symbol]++;
@@ -77,4 +91,6 @@ int Huffman::decode(bool bit){
 
 
 }
+Huffman::~Huffman(){
 
+}
