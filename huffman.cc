@@ -20,7 +20,7 @@ void Huffman::build_huffman() {
 
 	HForest forest = HForest();
 	for (int c=0; c<Huffman::ALPHABET_SIZE; c++){
-		forest.HForest::add_tree(HTree::tree_ptr_t(new HTree(c, freq_table[c])));
+		forest.add_tree(HTree::tree_ptr_t(new HTree(c, freq_table[c])));
 		//forest.HForest::add_tree(tree);
 	}
 	while(forest.size()>1){
@@ -30,7 +30,7 @@ void Huffman::build_huffman() {
 
 		HTree::tree_ptr_t sec_smallest = forest.HForest::pop_top();
 	
-		 forest.HForest::add_tree(HTree::tree_ptr_t(new HTree(fake_key, 
+		 forest.add_tree(HTree::tree_ptr_t(new HTree(fake_key, 
 			smallest->get_value()+sec_smallest->get_value(),
 			smallest,
 			sec_smallest)));
@@ -49,7 +49,7 @@ Huffman::bits_t Huffman::encode(int symbol) {
 	HTree::possible_path_t huff_path = huff_tree->path_to(symbol);
 	bits_t bin_out;
 	auto path_index = huff_path->begin();
-	for (int i = 0; i <= (int)huff_path->size(); i++){
+	for (int i = 0; i < (int)huff_path->size(); i++){
 		if (*path_index == HTree::Direction::LEFT){
 			bin_out.push_back(false);
 		}

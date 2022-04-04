@@ -32,7 +32,7 @@ void test_encode()
   bits = huff.encode('b');
   bits = huff.encode('b');
   printf("size of bits: %ld\n",bits.size());
-  printf("size of huff: %ld\n",huff.encode('b').size());
+  printf("size of huff: %ld\n",huff.encode('a').size());
   assert(bits.size() < huff.encode('a').size());
 }
 
