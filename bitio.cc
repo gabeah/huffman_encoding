@@ -1,6 +1,7 @@
 #include "bitio.hh"
 #include <iostream>
 #include <algorithm>
+#include <cassert>
 BitInput::BitInput(std::istream& is){
 	counterInput = 8;
 	bufferInput = 0;
@@ -11,7 +12,7 @@ BitOutput::BitOutput(std::ostream& os){
 } 
 bool BitInput::input_bit(){
 	if(counterInput == 8){
-		bufferInput = is.get();
+		bufferInput = std::istream& is.get();
 		counterInput = 0;
 	}
 	bool val = bufferInput & 1;
@@ -21,17 +22,17 @@ bool BitInput::input_bit(){
 }
 
 void BitOutput::output_bit(bool bit){
-	if(counterInput == 8){
-		os.put(bufferInput);
-		counterInput = 0;
+	if(counterOutput == 8){
+		os.put(bufferOutput);
+		counterOutput = 0;
 	}
 	if(bit){
-		bufferinput = bufferinput << 1;
-		counterInput ++;
+		bufferOutput = bufferOutput << 1;
+		counterOutput ++;
 	}
 	else if(!bit){
-		bufferinput = bufferinput << 0;
-		counterInput ++;
+		bufferOutut = bufferOutput << 0;
+		counterOutput ++;
 	}
 	else{
 		assert(false);
