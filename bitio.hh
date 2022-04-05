@@ -19,7 +19,7 @@ class BitInput {
   // Allowed to crash or throw an exception if called past end-of-file.
   bool input_bit();
 private:
-  std::istream& isInput;
+  std::istream& is_;
   uint8_t bufferInput;
   uint8_t counterInput;
 };
@@ -43,7 +43,7 @@ class BitOutput {
   // Output a single bit (buffered)
   void output_bit(bool bit);
 private:
-  std::ostream& osOutput;
+  std::ostream& os_;
   uint8_t bufferOutput;
   uint8_t counterOutput;
 };
