@@ -3,10 +3,10 @@
 #include <algorithm>
 #include <cassert>
 BitInput::BitInput(std::istream& is)
-:is_(is), counterInput(8), bufferInput(0)
+:is_(is), bufferInput(0), counterInput(8)
 {}
 BitOutput::BitOutput(std::ostream& os)
-:os_(os), counterOutput(8), bufferOutput(0)
+:os_(os),  bufferOutput(0), counterOutput(0)
 {}
 bool BitInput::input_bit(){
 	if(counterInput == 8){
@@ -29,12 +29,10 @@ void BitOutput::output_bit(bool bit){
 	counterOutput++;
 
 }
-
 BitOutput::~BitOutput(){
-	while (counterOutput < 8){
+	while(counterOutput < 8){
 		bufferOutput <<= 1;
-		bufferOutput |= 0;
-		counterOutput ++;
+		counterOutput++;
 	}
 	os_.put(bufferOutput);
 }
