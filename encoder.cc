@@ -14,16 +14,26 @@ int main(int argc, char *argv[]) {
 	}
 	else {
 		for(int i = 1; i < argc; i++){
+
 			std::ifstream is_file (argv[i], in *);
 			is_file.seekg (0, is_file.end);
 			int f_length = is.tellg();
 			is_file.seekg (0, is_file.beg);
 
-			for(int j = 0; j < f_length; j++){
-				is_file.seekg(0, is_file.beg);
-				int char_in = get(is_file.seekg(0,j));
-				bits_t char_bit = Huffman::encode(char_in);
+			std::ofstream os_file (argv[i]+".comp", out *);
+			BitOutput::BitOutput(os_file);
+			
+			char symbol;
+
+			while(is_file.get(symbol)){
+				bits_t char_bit = Huffman::encode(symbol);
+				BitOutput::output_bit(char_bit);
 			}
+			
+			is_file.close();
+			os_file.close();
+
+			return 0;
 		}
 	}
 }
