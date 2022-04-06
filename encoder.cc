@@ -13,29 +13,28 @@ int main(int argc, char *argv[]) {
 		return 0;
 	}
 	else {
-		for(int i = 1; i < argc; i++){
 
-			std::ifstream is_file (argv[i], std::ifstream::in);
+		std::ifstream is_file (argv[1], std::ifstream::in);
 
-			std::string filename = argv[i];
+		std::string filename = argv[1];
 
-			std::ofstream os_file (filename+".comp", std::ofstream::out);
-			BitOutput output(os_file);	
-			
-			Huffman encode_tree;
-			char symbol;
+		std::ofstream os_file (filename+".comp", std::ofstream::out);
+		BitOutput output(os_file);	
+		
+		Huffman encode_tree;
+		char symbol;
 
-			while(is_file.get(symbol)){
-				Huffman::bits_t char_bit = encode_tree.encode(symbol);
-				for(auto j : char_bit){
-					output.output_bit(j);
-				}
+		while(is_file.get(symbol)){
+			std::cout << symbol;
+			Huffman::bits_t char_bit = encode_tree.encode(symbol);
+			for(auto j : char_bit){
+				output.output_bit(j);
 			}
-			
-			is_file.close();
-			os_file.close();
-
-			return 0;
 		}
+		
+		is_file.close();
+		os_file.close();
+
+		return 0;
 	}
 }
