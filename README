@@ -1,1 +1,9 @@
-This is a readme :)
+Gabe Howland and Daniel Kryzhanovsky
+Part 1: Huffamn
+We started Huffman my adding the vector that takes in all the ASCII values to the vecotr, as the given ALPHABET_SIZE already was able to hold all ASCII values, so we used a for loop to add all the values to the frequency table because a for loop allowed the frquency tbale to better itirate and initliaze all the values. In the header, we added the neccesary pointers and build_huffman to initiate us building the tree. Within the build_huffman, we have the tree added to the huffman by having everything done in one line becuase that was the way the tree was able to be correctly initialized without getting the program confused or unsure of what to exactly add. It then succesfully pops out the two lowest trees to add them to the whole, doin to the rest of the trees to build the entire huffman. Within the huffman encoder, if the path is left, it returns false, and true if the path is right. It is able to advance throughout the entire tree within the for loop. The decoder of huffman then uses get_child of left and right to obtain the key and values of each tree, which then allows it to fully decode all of the trees within the huffman.
+Part 2: Bitio
+
+Part 3: Encoder/Decoder
+Part 4: Compression Tests
+
+File Name   | Raw Size   | Compressed Size   | Do the two files match?
