@@ -32,8 +32,6 @@ int main(int argc, char *argv[]) {
 			}
 		}
 		
-		is_file.close();
-		os_file.close();
 
 		return 0;
 	}
