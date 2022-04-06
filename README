@@ -7,3 +7,4 @@ Part 3: Encoder/Decoder
 Part 4: Compression Tests
 
 File Name   | Raw Size   | Compressed Size   | Do the two files match?
+lorum.txt   | 44 kb      | 24 kb                  
