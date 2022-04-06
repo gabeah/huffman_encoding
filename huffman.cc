@@ -44,7 +44,7 @@ void Huffman::build_huffman() {
 
 Huffman::bits_t Huffman::encode(int symbol) {
 
-	printf("%d\n", symbol);
+//	printf("%d\n", symbol);
 	build_huffman();
 	HTree::possible_path_t huff_path = huff_tree->path_to(symbol);
 	bits_t bin_out;
