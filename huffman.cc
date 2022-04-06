@@ -79,7 +79,7 @@ int Huffman::decode(bool bit){
 		decode_ptr = decode_ptr->get_child(HTree::Direction::LEFT);
 	}
 
-	if(decode_ptr->get_key() < 0){
+	if(decode_ptr->get_key() <= 0){
 		return decode_ptr->get_key();
 	}
 	else{
