@@ -15,19 +15,21 @@ int main(int argc, char *argv[]) {
 	else {
 		for(int i = 1; i < argc; i++){
 
-			std::ifstream is_file (argv[i], in *);
-			is_file.seekg (0, is_file.end);
-			int f_length = is.tellg();
-			is_file.seekg (0, is_file.beg);
+			std::ifstream is_file (argv[i], std::ifstream::in);
 
-			std::ofstream os_file (argv[i]+".comp", out *);
-			BitOutput::BitOutput(os_file);
+			std::string filename = argv[i];
+
+			std::ofstream os_file (filename+".comp", std::ofstream::out);
+			BitOutput output(os_file);	
 			
+			Huffman encode_tree;
 			char symbol;
 
 			while(is_file.get(symbol)){
-				bits_t char_bit = Huffman::encode(symbol);
-				BitOutput::output_bit(char_bit);
+				Huffman::bits_t char_bit = encode_tree.encode(symbol);
+				for(auto j : char_bit){
+					output.output_bit(j);
+				}
 			}
 			
 			is_file.close();
