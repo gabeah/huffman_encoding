@@ -31,7 +31,10 @@ int main(int argc, char *argv[]) {
 				output.output_bit(j);
 			}
 		}
-		
+		Huffman::bits_t char_bit = encode_tree.encode(Huffman::HEOF);
+		for(auto k : char_bit){
+			output.output_bit(k);
+		}
 
 		return 0;
 	}
